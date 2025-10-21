@@ -1,22 +1,36 @@
+#ifndef Node_h
+#define Node_h
 #include <iostream>
 #include <vector>
 struct Node
 {
+private:
     // data members
     int data;
     Node *left;
     Node *right;
+
+public:
     // constructor
+    Node() : data(0), left(nullptr), right(nullptr) {}
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
     // insert function (singular)
+    ~Node() {
+        delete left;
+        delete right;
+    }
     Node *insert(Node *root, int val)
     {
+        
         if (root == nullptr)
         {
             return new Node(val);
         }
         if (val < root->data)
         {
+            if (val == -1) {
+                return root; // Skip insertion for -1
+            }
             root->left = insert(root->left, val);
         }
         else
@@ -25,6 +39,14 @@ struct Node
         }
         return root;
     }
+    void insertValues(int vals[], int size)
+    {
+        for (int i = 0; i < size; ++i)
+        {
+            insert(this, vals[i]);
+        }
+    }
+
     // traversal functions
     void inorder(Node *root)
     {
@@ -80,20 +102,21 @@ struct Node
     }
 
     // tree height function
-    void treeHeight(Node *root, int &height, int currentHeight)
+    void treeHeight(Node *root, int &height,int currentHeight)
     {
         // base case
         if (root == nullptr)
         {
             // update height if currentHeight is greater
-            if (currentHeight > height)
+            if (currentHeight - 1 > height)
             {
-                height = currentHeight;
+                height = currentHeight - 1;
             }
             return;
         }
         // traverse left and right subtrees
         treeHeight(root->left, height, currentHeight + 1);
-        treeHeight(root->right, height, currentHeight + 1);
+        treeHeight(root->right,height, currentHeight + 1);
     }
 };
+#endif
