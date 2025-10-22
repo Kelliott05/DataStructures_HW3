@@ -5,9 +5,11 @@
 void InsertValues::display()
 {
     bool addMore = true;
-    Node node(0); // Temporary node to access member functions
+    Node node;
     while (addMore)
     {
+        i = 0;
+        val[100] = {0};
         std::cout << "insert values for the tree separated by spaces and end with -1: ";
         std::cin >> temp;
         while (temp != -1)
@@ -41,6 +43,8 @@ void InsertValues::display()
         std::cout << std::endl;
     }
     addMore = true;
+    std::cout << "Would you like to search the tree? (1 for yes, 0 for no): " << std::endl;
+    std::cin >> addMore;
     while (addMore)
     {
         int searchVal;
@@ -56,6 +60,6 @@ void InsertValues::display()
         std::cin >> addMore;
         std::cout << std::endl;
     }
-    
+
     node.~Node();
 };

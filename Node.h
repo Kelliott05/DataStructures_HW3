@@ -12,7 +12,7 @@ private:
 
 public:
     // constructor
-    Node() : data(0), left(nullptr), right(nullptr) {}
+    Node() : data(), left(nullptr), right(nullptr) {}
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
     // insert function (singular)
     ~Node() {
@@ -22,11 +22,16 @@ public:
     Node *insert(Node *root, int val)
     {
         
-        if (root == nullptr)
+        if (root == nullptr )
         {
             return new Node(val);
         }
-        if (val < root->data)
+        if (data == 0)
+        {
+            data = val;
+            return root = new Node(val);
+        }
+        else if (val < root->data)
         {
             if (val == -1) {
                 return root; // Skip insertion for -1
@@ -39,6 +44,7 @@ public:
         }
         return root;
     }
+  
     void insertValues(int vals[], int size)
     {
         for (int i = 0; i < size; ++i)
