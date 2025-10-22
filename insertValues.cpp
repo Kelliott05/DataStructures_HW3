@@ -40,5 +40,22 @@ void InsertValues::display()
         std::cin >> addMore;
         std::cout << std::endl;
     }
+    addMore = true;
+    while (addMore)
+    {
+        int searchVal;
+        bool found = false;
+        std::cout << "Enter a value to search in the tree: ";
+        std::cin >> searchVal;
+        node.searchTree(&node, searchVal, found, 0);
+        if (!found)
+        {
+            std::cout << "Value " << searchVal << " not found in the tree." << std::endl;
+        }
+        std::cout << "\n\nWould you like to search for another value? (1 for yes, 0 for no): ";
+        std::cin >> addMore;
+        std::cout << std::endl;
+    }
+    
     node.~Node();
 };
